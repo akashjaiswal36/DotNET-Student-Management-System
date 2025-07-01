@@ -1,0 +1,15 @@
+<!-- shortened -->
+<script>
+async function load(){
+  const rows = await fetch('/api/students').then(r=>r.json());
+  // render table ...
+}
+document.forms[0].onsubmit = async e=>{
+  e.preventDefault();
+  const s={id:+id.value,name:name.value,course:course.value};
+  await fetch('/api/students',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(s)});
+  load(); e.target.reset();
+};
+async function del(id){ await fetch(`/api/students/${id}`,{method:'DELETE'}); load(); }
+load();
+</script>
